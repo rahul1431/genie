@@ -12,7 +12,7 @@
 
     <application
         android:name="${applicationName}"
-        android:label="Glover"
+        android:label="Genie On Bike"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/launcher_icon"
