@@ -1,4 +1,4 @@
-package online.edentech.fuodz
+package com.genieonbike.genieonbike
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
