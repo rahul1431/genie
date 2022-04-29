@@ -4,7 +4,7 @@ class Api {
   
 
   static String get baseUrl {
-    return "https://fuodz.edentech.online/api";
+    return "https://admin.genieonbike.com/api";
     // return "http://192.168.8.168:8000/api";
   }
 
