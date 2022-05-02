@@ -2,48 +2,33 @@ class AppLanguages {
   //
   static List<String> get codes => [
         "en",
-        "ar",
-        "fr",
-        "es",
-        "ko",
-        "de",
-        "pt",
         "hi",
-        "tr",
-        "ru",
-        "my",
-        "zh-cn",
-        "ja"
+        "te",
+        "kn",
+        "mr",
+        "bn",
+        "ta",
+        "ml"
       ];
   static List<String> get names => [
         "English",
-        "Arabic",
-        "French",
-        "Spanish",
-        "Korean",
-        "German",
-        "Portuguese",
         "Hindi",
-        "Turkish",
-        "Russian",
-        "Myanmar",
-        "Chinese",
-        "Japanese"
+        "Telugu",
+        "Kannada",
+        "Marathi",
+        "Bengali",
+        "Tamil",
+        "Malayalam"
       ];
 
   static List<String> get flags => [
         "US",
-        "AE",
-        "FR",
-        "ES",
-        "KR",
-        "DE",
-        "PT",
         "IN",
-        "TR",
-        "RU",
-        "MY",
-        "CN",
-        "JP"
+        "IN",
+        "IN",
+        "IN",
+        "BD",
+        "IN",
+        "IN"
       ];
 }
