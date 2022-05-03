@@ -23,7 +23,6 @@ import 'package:fuodz/views/pages/search/search.page.dart';
 import 'package:fuodz/views/pages/service/service_details.page.dart';
 import 'package:fuodz/views/pages/vendor/vendor_reviews.page.dart';
 import 'package:fuodz/widgets/bottomsheets/delivery_address_picker.bottomsheet.dart';
-// import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
@@ -37,6 +36,7 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   //
   BuildContext viewContext;
   final formKey = GlobalKey<FormState>();
+  GlobalKey genKey = GlobalKey();
   final currencySymbol = AppStrings.currencySymbol;
   DeliveryAddress deliveryaddress = DeliveryAddress();
   String firebaseVerificationId;

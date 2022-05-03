@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fuodz/constants/app_colors.dart';
-import 'package:fuodz/models/option_group.dart';
 import 'package:fuodz/models/product.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
 import 'package:fuodz/view_models/product_details.vm.dart';
 import 'package:fuodz/views/pages/commerce/widgets/similar_commerce_products.view.dart';
 import 'package:fuodz/views/pages/product/widgets/commerce_product_details.header.dart';
-import 'package:fuodz/views/pages/product/widgets/product_details_cart.bottom_sheet.dart';
+import 'package:fuodz/views/pages/product/widgets/commerce_product_details_cart.bottom_sheet.dart';
+import 'package:fuodz/views/pages/product/widgets/commerce_product_options.dart';
+import 'package:fuodz/views/pages/product/widgets/commerce_product_price.dart';
+import 'package:fuodz/views/pages/product/widgets/commerce_product_qty.dart';
+import 'package:fuodz/views/pages/product/widgets/commerce_seller_tile.dart';
 import 'package:fuodz/views/pages/product/widgets/product_image.gallery.dart';
-import 'package:fuodz/views/pages/product/widgets/product_option_group.dart';
-import 'package:fuodz/views/pages/product/widgets/product_options.header.dart';
 import 'package:fuodz/widgets/base.page.dart';
-import 'package:fuodz/widgets/busy_indicator.dart';
-import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:fuodz/widgets/html_text_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -42,6 +42,7 @@ class CommerceProductDetailsPage extends StatelessWidget {
               SliverToBoxAdapter(
                 child: SafeArea(
                   bottom: false,
+                  top: false,
                   child: Hero(
                     tag: model.product.heroTag,
                     child: ProductImagesGalleryView(model.product),
@@ -55,35 +56,24 @@ class CommerceProductDetailsPage extends StatelessWidget {
                     //product header
                     CommerceProductDetailsHeader(
                       product: model.product,
-                      showVendor: false,
+                      model: model,
                     ),
+                    UiSpacer.divider(),
+                    //price
+                    CommerceProductPrice(model: model),
+                    UiSpacer.divider(),
+                    //options
+                    CommerceProductOptions(model),
+                    UiSpacer.divider(),
+                    //qty
+                    CommerceProductQtyEntry(model: model),
+                    UiSpacer.divider(),
+                    //vendor/seller details
+                    CommerceSellerTile(model: model),
                     UiSpacer.divider().pOnly(bottom: Vx.dp12),
 
                     //product details
-                    model.product.description.text.light.sm.make().px20(),
-
-                    //options header
-                    Visibility(
-                      visible: model.product.optionGroups.isNotEmpty,
-                      child: VStack(
-                        [
-                          ProductOptionsHeader(
-                            description:
-                                "Select options to add them to the product"
-                                    .tr(),
-                          ),
-
-                          //options
-                          model.busy(model.product)
-                              ? BusyIndicator().centered().py20()
-                              : VStack(
-                                  [
-                                    ...buildProductOptions(model),
-                                  ],
-                                ),
-                        ],
-                      ),
-                    ),
+                    HtmlTextView(model.product.description),
 
                     //similar products
                     SimilarCommerceProducts(product),
@@ -99,17 +89,9 @@ class CommerceProductDetailsPage extends StatelessWidget {
               ),
             ],
           ).box.color(AppColor.faintBgColor).make(),
-          bottomSheet: ProductDetailsCartBottomSheet(model: model),
+          bottomSheet: CommerceProductDetailsCartBottomSheet(model: model),
         );
       },
     );
-  }
-
-  //
-  buildProductOptions(model) {
-    return model.product.optionGroups.map((OptionGroup optionGroup) {
-      return ProductOptionGroup(optionGroup: optionGroup, model: model)
-          .pOnly(bottom: Vx.dp12);
-    }).toList();
   }
 }

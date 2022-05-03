@@ -104,9 +104,11 @@ class CheckoutBaseViewModel extends PaymentViewModel {
         vendorId: vendor.id,
       );
 
+      if (checkout.deliveryAddress != null) {
       //
       checkDeliveryRange();
       updateTotalOrderSummary();
+      }
     } catch (error) {
       print("Error Fetching preselected Address ==> $error");
     }
@@ -470,7 +472,8 @@ class CheckoutBaseViewModel extends PaymentViewModel {
         title: "Minimum Order Value".tr(),
         text: "Order value/amount is less than vendor accepted minimum order"
                 .tr() +
-            "${AppStrings.currencySymbol} ${orderVendor.minOrder}".currencyFormat(),
+            "${AppStrings.currencySymbol} ${orderVendor.minOrder}"
+                .currencyFormat(),
       );
       return false;
     }
@@ -484,7 +487,8 @@ class CheckoutBaseViewModel extends PaymentViewModel {
         title: "Maximum Order Value".tr(),
         text: "Order value/amount is more than vendor accepted maximum order"
                 .tr() +
-            "${AppStrings.currencySymbol} ${orderVendor.maxOrder}".currencyFormat(),
+            "${AppStrings.currencySymbol} ${orderVendor.maxOrder}"
+                .currencyFormat(),
       );
       return false;
     }

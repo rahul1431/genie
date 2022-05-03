@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/models/checkout.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
-import 'package:fuodz/view_models/checkout.vm.dart';
+import 'package:fuodz/view_models/multiple_checkout.vm.dart';
 import 'package:fuodz/views/pages/checkout/widgets/order_delivery_address.view.dart';
 import 'package:fuodz/views/pages/checkout/widgets/payment_methods.view.dart';
 import 'package:fuodz/views/pages/checkout/widgets/schedule_order.view.dart';
@@ -15,38 +14,26 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:supercharged/supercharged.dart';
-import 'package:flutter/services.dart';
 
-class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({this.checkout, Key key}) : super(key: key);
+class MultipleOrderCheckoutPage extends StatelessWidget {
+  const MultipleOrderCheckoutPage({this.checkout, Key key}) : super(key: key);
 
   final CheckOut checkout;
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CheckoutViewModel>.reactive(
-      viewModelBuilder: () => CheckoutViewModel(context, checkout),
+    return ViewModelBuilder<MultipleCheckoutViewModel>.reactive(
+      viewModelBuilder: () => MultipleCheckoutViewModel(context, checkout),
       onModelReady: (vm) => vm.initialise(),
       builder: (context, vm, child) {
         return BasePage(
           showAppBar: true,
           showLeadingAction: true,
-          title: "Checkout".tr(),
+          title: "Multiple Order Checkout".tr(),
           body: VStack(
             [
               //
               UiSpacer.verticalSpace(),
-              Visibility(
-                visible: !vm.isPickup ?? true,
-                child: CustomTextFormField(
-                labelText:
-                    "Driver Tip".tr() + " (${AppStrings.currencySymbol})",
-                textEditingController: vm.driverTipTEC,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                onChanged: (value) => vm.updateCheckoutTotalAmount(),
-              ).pOnly(bottom: Vx.dp20),
-              ),
               //
               CustomTextFormField(
                 labelText: "Note".tr(),
@@ -74,7 +61,7 @@ class CheckoutPage extends StatelessWidget {
                 discount: vm.checkout.discount,
                 deliveryFee: vm.checkout.deliveryFee,
                 tax: vm.checkout.tax,
-                vendorTax: vm.vendor.tax,
+                vendorTax: vm.totalTax.toString(),
                 driverTip: vm.driverTipTEC.text.toDouble() ?? 0.00,
                 total: vm.checkout.totalWithTip,
               ),

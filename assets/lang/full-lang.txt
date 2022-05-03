@@ -330,7 +330,6 @@ Loading Please wait...
 Forgot Password
 Phone Number
 Send OTP
-
 Welcome Back
 Login to continue
 Join Us
@@ -620,3 +619,25 @@ Email/Phone
 RECEIVE
 My Wallet Address
 Close
+Ok
+Cancel
+Multiple Order Checkout
+preparing
+pending
+request
+review
+failed
+cancelled
+successful
+ready
+delivered
+enroute
+scheduled
+pending
+pending
+pending
+Buy Now
+Total Price:
+Quantity:
+Seller:
+Note: Long press option to see option full details

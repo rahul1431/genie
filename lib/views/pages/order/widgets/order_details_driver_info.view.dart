@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fuodz/constants/app_colors.dart';
+import 'package:fuodz/constants/app_ui_settings.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
 import 'package:fuodz/view_models/order_details.vm.dart';
 import 'package:fuodz/widgets/buttons/custom_button.dart';
@@ -45,15 +46,19 @@ class OrderDetailsDriverInfoView extends StatelessWidget {
                       ],
                     )
                   : UiSpacer.emptySpace(),
-              vm.order.canChatDriver
-                  ? CustomButton(
+              if (vm.order.canChatDriver)
+                Visibility(
+                  visible: AppUISettings.canDriverChat,
+                  child: CustomButton(
                       icon: FlutterIcons.chat_ent,
                       iconColor: Colors.white,
                       title: "Chat with driver".tr(),
                       color: AppColor.primaryColor,
                       onPressed: vm.chatDriver,
-                    ).h(Vx.dp48).pOnly(top: Vx.dp12, bottom: Vx.dp20)
-                  : UiSpacer.emptySpace(),
+                  ).h(Vx.dp48).pOnly(top: Vx.dp12, bottom: Vx.dp20),
+                )
+              else
+                UiSpacer.emptySpace(),
 
               //rate driver
               vm.order.canRateDriver

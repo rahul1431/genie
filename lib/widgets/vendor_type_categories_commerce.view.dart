@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fuodz/constants/app_colors.dart';
 import 'package:fuodz/models/vendor_type.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
-import 'package:fuodz/utils/utils.dart';
+// import 'package:fuodz/utils/utils.dart';
 import 'package:fuodz/view_models/vendor/categories.vm.dart';
 import 'package:fuodz/views/pages/category/categories.page.dart';
-import 'package:fuodz/widgets/custom_image.view.dart';
+// import 'package:fuodz/widgets/custom_image.view.dart';
 import 'package:fuodz/widgets/custom_list_view.dart';
+import 'package:fuodz/widgets/list_items/category.list_item.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -97,6 +98,11 @@ class _CommerceTypeVendorTypeCategoriesState
               isLoading: model.isBusy,
               itemBuilder: (context, index) {
                 final category = model.categories[index];
+                return CategoryListItem(
+                  category: category,
+                  onPressed: model.categorySelected,
+                );
+                /*
                 return VStack(
                   [
                     //
@@ -129,13 +135,13 @@ class _CommerceTypeVendorTypeCategoriesState
                     .color(Vx.hexToColor(category.color) ??
                         context.backgroundColor)
                     .outerShadowSm
-                    .withRounded(value: 25)
                     .clip(Clip.antiAlias)
                     .make()
                     .p2()
                     .w(62);
+                    */
               },
-            ).h(80),
+            ).h(100),
           ],
         );
       },

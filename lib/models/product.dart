@@ -172,6 +172,9 @@ class Product {
   double get sellPrice {
     return showDiscount ? discountPrice : price;
   }
+  double get totalPrice {
+    return sellPrice * (selectedQty ?? 1);
+  }
 
   int get discountPercentage {
     if (discountPrice < price) {

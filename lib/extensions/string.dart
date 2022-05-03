@@ -70,4 +70,7 @@ extension NumberParsing on dynamic {
     }
   }
 
+  bool isNotDefaultImage() {
+    return !this.toString().contains("default");
+  }
 }

@@ -23,7 +23,14 @@ class AuthServices {
     return LocalStorageService.prefs.getBool(AppStrings.authenticated) ?? false;
   }
 
-  static Future<bool> isAuthenticated() {
+  static Future<bool> isAuthenticated() async {
+    await LocalStorageService.rxPrefs.write(
+      AppStrings.authenticated,
+      true,
+      (value) {
+        return value;
+      },
+    );
     return LocalStorageService.prefs.setBool(AppStrings.authenticated, true);
   }
 
@@ -100,6 +107,7 @@ class AuthServices {
   static void logout() async {
     await HttpService().getCacheManager().clearAll();
     await LocalStorageService.prefs.clear();
+    await LocalStorageService.rxPrefs.clear();
     await LocalStorageService.prefs.setBool(AppStrings.firstTimeOnApp, false);
     FirebaseService().firebaseMessaging.unsubscribeFromTopic("all");
     FirebaseService()

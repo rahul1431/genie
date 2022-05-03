@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fuodz/constants/app_ui_settings.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
 import 'package:fuodz/view_models/vendor_details.vm.dart';
 import 'package:fuodz/widgets/buttons/call.button.dart';
@@ -67,7 +68,10 @@ class VendorDetailsHeader extends StatelessWidget {
                               .maxLines(1)
                               .make(),
                         ),
-                        model.vendor.phone.text.light.sm.make(),
+                        Visibility(
+                          visible: AppUISettings.showVendorPhone,
+                          child: model.vendor.phone.text.light.sm.make(),
+                        ),
 
                         //rating
                         HStack(
@@ -117,9 +121,13 @@ class VendorDetailsHeader extends StatelessWidget {
                         ),
                         UiSpacer.verticalSpace(space: 5),
                         //call button
-                        (model.vendor.phone != null)
-                            ? CallButton(model.vendor, size: 10)
-                            : UiSpacer.emptySpace(),
+                        if (model.vendor.phone != null)
+                          Visibility(
+                            visible: AppUISettings.showVendorPhone,
+                            child: CallButton(model.vendor, size: 10),
+                          )
+                        else
+                          UiSpacer.emptySpace(),
                       ],
                     ).pOnly(left: Vx.dp12),
                   ],

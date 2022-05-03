@@ -1,13 +1,15 @@
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:fuodz/constants/app_routes.dart';
+import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/models/cart.dart';
 import 'package:fuodz/models/checkout.dart';
 import 'package:fuodz/models/coupon.dart';
 import 'package:fuodz/requests/cart.request.dart';
+import 'package:fuodz/services/alert.service.dart';
 import 'package:fuodz/services/auth.service.dart';
 import 'package:fuodz/services/cart.service.dart';
 import 'package:fuodz/view_models/base.view_model.dart';
+import 'package:fuodz/views/pages/checkout/multiple_order_checkout.page.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -94,13 +96,12 @@ class CartViewModel extends MyBaseViewModel {
   //
   deleteCartItem(int index) {
     //
-    CoolAlert.show(
-      context: viewContext,
-      type: CoolAlertType.confirm,
+    // AlertService.showConfirm()
+    AlertService.showConfirm(
       title: "Remove From Cart".tr(),
       text: "Are you sure you want to remove this product from cart?".tr(),
       confirmBtnText: "Yes".tr(),
-      onConfirmBtnTap: () async {
+      onConfirm: () async {
         //
         //remove item/product from cart
         cartItems.removeAt(index);
@@ -175,10 +176,19 @@ class CartViewModel extends MyBaseViewModel {
 
     //
     if (canOpenCheckout) {
-      final result = await viewContext.navigator.pushNamed(
+      dynamic result;
+      //check if multiple vendor order was added to cart
+      if (AppStrings.enableMultipleVendorOrder &&
+          CartServices.isMultipleOrder()) {
+        result = await viewContext.push(
+          (ctx) => MultipleOrderCheckoutPage(checkout: checkOut),
+        );
+      } else {
+        result = await viewContext.navigator.pushNamed(
         AppRoutes.checkoutRoute,
         arguments: checkOut,
       );
+      }
 
       if (result != null && result) {
         //

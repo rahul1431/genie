@@ -15,6 +15,8 @@ class AppStrings {
   static bool get enableOTPLogin => env('enableOTPLogin') == "1";
   static bool get enableGoogleDistance => env('enableGoogleDistance') == "1";
   static bool get enableSingleVendor => env('enableSingleVendor') == "1";
+  static bool get enableMultipleVendorOrder =>
+      env('enableMultipleVendorOrder') ?? false;
   static bool get enableReferSystem => env('enableReferSystem') == "1";
   static String get referAmount => env('referAmount');
   static bool get enableChat => env('enableChat') == "1";

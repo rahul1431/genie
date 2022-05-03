@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:fuodz/widgets/base.page.dart';
+import 'package:i18n_extension/i18n_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -64,8 +65,15 @@ class _CustomWebviewPageState extends State<CustomWebviewPage> {
     );
 
     ///
-    setState(() {
       selectedUrl = widget.selectedUrl.replaceFirst("http://", "https://");
+    if (!selectedUrl.contains("?")) {
+      selectedUrl = "$selectedUrl?lan=${I18n.localeStr}";
+    } else {
+      selectedUrl = "$selectedUrl&lan=${I18n.localeStr}";
+    }
+
+    setState(() {
+      selectedUrl = selectedUrl;
     });
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fuodz/constants/app_strings.dart';
+import 'package:fuodz/constants/app_ui_settings.dart';
 import 'package:fuodz/extensions/string.dart';
 import 'package:fuodz/services/auth.service.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
@@ -117,43 +118,55 @@ class _WalletManagementViewState extends State<WalletManagementView>
                           ).py8(),
                         ),
                       ).expand(),
-                      UiSpacer.horizontalSpace(space: 5),
+                      Visibility(
+                        visible: AppUISettings.allowWalletTransfer,
+                        child: UiSpacer.horizontalSpace(space: 5),
+                      ),
                       //tranfer button
-                      CustomButton(
-                        onPressed: vm.showWalletTransferEntry,
-                        child: FittedBox(
-                          child: VStack(
-                            [
-                              Icon(
-                                FlutterIcons.upload_fea,
-                              ),
-                              UiSpacer.verticalSpace(space: 5),
-                              //
-                              "SEND".tr().text.make(),
-                            ],
-                            crossAlignment: CrossAxisAlignment.center,
-                          ).py8(),
-                        ),
-                      ).expand(),
-                      UiSpacer.horizontalSpace(space: 5),
+                      Visibility(
+                        visible: AppUISettings.allowWalletTransfer,
+                        child: CustomButton(
+                          onPressed: vm.showWalletTransferEntry,
+                          child: FittedBox(
+                            child: VStack(
+                              [
+                                Icon(
+                                  FlutterIcons.upload_fea,
+                                ),
+                                UiSpacer.verticalSpace(space: 5),
+                                //
+                                "SEND".tr().text.make(),
+                              ],
+                              crossAlignment: CrossAxisAlignment.center,
+                            ).py8(),
+                          ),
+                        ).expand(),
+                      ),
+                      Visibility(
+                        visible: AppUISettings.allowWalletTransfer,
+                        child: UiSpacer.horizontalSpace(space: 5),
+                      ),
                       //tranfer button
-                      CustomButton(
-                        onPressed: vm.showMyWalletAddress,
-                        loading: vm.busy(vm.showMyWalletAddress),
-                        child: FittedBox(
-                          child: VStack(
-                            [
-                              Icon(
-                                FlutterIcons.download_fea,
-                              ),
-                              UiSpacer.verticalSpace(space: 5),
-                              //
-                              "RECEIVE".tr().text.make(),
-                            ],
-                            crossAlignment: CrossAxisAlignment.center,
-                          ).py8(),
-                        ),
-                      ).expand(),
+                      Visibility(
+                        visible: AppUISettings.allowWalletTransfer,
+                        child: CustomButton(
+                          onPressed: vm.showMyWalletAddress,
+                          loading: vm.busy(vm.showMyWalletAddress),
+                          child: FittedBox(
+                            child: VStack(
+                              [
+                                Icon(
+                                  FlutterIcons.download_fea,
+                                ),
+                                UiSpacer.verticalSpace(space: 5),
+                                //
+                                "RECEIVE".tr().text.make(),
+                              ],
+                              crossAlignment: CrossAxisAlignment.center,
+                            ).py8(),
+                          ),
+                        ).expand(),
+                      ),
                     ],
                   ),
                 ),

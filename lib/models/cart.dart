@@ -27,7 +27,8 @@ class Cart {
   factory Cart.fromJson(Map<String, dynamic> json) {
     return Cart(
       selectedQty: json["selected_qty"] == null ? null : json["selected_qty"],
-      price: json["price"] == null ? null : double.parse(json["price"].toString()),
+      price:
+          json["price"] == null ? null : double.parse(json["price"].toString()),
       product:
           json["product"] == null ? null : Product.fromJson(json["product"]),
       options: json["options"] == null

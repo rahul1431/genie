@@ -55,6 +55,34 @@ class CheckoutRequest extends HttpService {
     return ApiResponse.fromResponse(apiResult);
   }
 
+  Future<ApiResponse> newMultipleVendorOrder(
+    CheckOut checkout, {
+    String note = "",
+    String tip = "",
+    @required Map payload,
+  }) async {
+    final apiResult = await post(
+      Api.orders,
+      {
+        ...payload,
+        "tip": tip,
+        "note": note,
+        "coupon_code": checkout.coupon?.code ?? "",
+        "pickup_date": checkout.deliverySlotDate,
+        "pickup_time": checkout.deliverySlotTime,
+        "delivery_address_id": checkout.deliveryAddress?.id,
+        "payment_method_id": checkout.paymentMethod.id,
+        "sub_total": checkout.subTotal,
+        "discount": checkout.discount,
+        "delivery_fee": checkout.deliveryFee,
+        "tax": checkout.tax,
+        "total": checkout.total,
+      },
+    );
+    //
+    return ApiResponse.fromResponse(apiResult);
+  }
+
   //
   Future<ApiResponse> newPackageOrder(
     PackageCheckout packageCheckout, {

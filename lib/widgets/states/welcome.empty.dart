@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fuodz/constants/app_colors.dart';
 import 'package:fuodz/constants/home_screen.config.dart';
+import 'package:fuodz/models/user.dart';
 import 'package:fuodz/services/auth.service.dart';
 import 'package:fuodz/services/navigation.service.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
@@ -26,6 +27,7 @@ class EmptyWelcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      key: vm.genKey,
       fit: StackFit.expand,
       children: [
         VxBox(
@@ -37,15 +39,29 @@ class EmptyWelcome extends StatelessWidget {
                   : Alignment.centerRight,
               child: VStack(
                 [
-                  ("Welcome".tr() +
-                          (vm.isAuthenticated()
-                              ? " ${AuthServices.currentUser?.name ?? ''}"
-                              : ""))
-                      .text
-                      .white
-                      .xl3
-                      .semiBold
-                      .make(),
+                  //welcome intro and loggedin account name
+                  StreamBuilder(
+                    stream: AuthServices.listenToAuthState(),
+                    builder: (ctx, snapshot) {
+                      //
+                      String introText = "Welcome".tr();
+                      String fullIntroText = introText;
+                      //
+                      if (snapshot.hasData) {
+                        return FutureBuilder<User>(
+                            future: AuthServices.getCurrentUser(),
+                            builder: (ctx, snapshot) {
+                              if (snapshot.hasData) {
+                                fullIntroText = "$introText ${snapshot.data.name}";
+                              }
+                              return fullIntroText.text.white.xl3.semiBold.make();
+                            });
+                      }
+                      return fullIntroText.text.white.xl3.semiBold.make();
+                    },
+                  ),
+                  //
+
                   "How can I help you today?".tr().text.white.xl.medium.make(),
                   UiSpacer.verticalSpace(),
                 ],
@@ -65,15 +81,19 @@ class EmptyWelcome extends StatelessWidget {
             //finance section
             WalletManagementView().px20(),
             //
-            UiSpacer.verticalSpace(),
             //top banner
             CustomVisibilty(
               visible: HomeScreenConfig.showBannerOnHomeScreen &&
                   HomeScreenConfig.isBannerPositionTop,
-              child: Banners(
-                null,
-                featured: true,
-              ).py12(),
+              child: VStack(
+                [
+                  UiSpacer.verticalSpace(),
+                  Banners(
+                    null,
+                    featured: true,
+                  ).py12(),
+                ],
+              ),
             ),
             //
             VStack(

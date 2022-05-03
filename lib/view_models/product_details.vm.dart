@@ -9,6 +9,7 @@ import 'package:fuodz/models/option_group.dart';
 import 'package:fuodz/models/product.dart';
 import 'package:fuodz/requests/favourite.request.dart';
 import 'package:fuodz/requests/product.request.dart';
+import 'package:fuodz/services/alert.service.dart';
 import 'package:fuodz/services/cart.service.dart';
 import 'package:fuodz/view_models/base.view_model.dart';
 import 'package:fuodz/views/pages/cart/cart.page.dart';
@@ -126,12 +127,33 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         product.isFavourite = true;
 
         //
-        CoolAlert.show(
-          context: viewContext,
-          title: "",
-          text: apiResponse.message,
-          type: CoolAlertType.success,
+        AlertService.success(text: apiResponse.message);
+      } else {
+        viewContext.showToast(
+          msg: apiResponse.message,
+          bgColor: Colors.red,
+          textColor: Colors.white,
+          position: VxToastPosition.top,
         );
+      }
+    } catch (error) {
+      setError(error);
+    }
+    setBusy(false);
+  }
+
+  removeFromFavourite() async {
+    //
+    setBusy(true);
+
+    try {
+      //
+      final apiResponse = await _favouriteRequest.removeFavourite(product.id);
+      if (apiResponse.allGood) {
+        //
+        product.isFavourite = false;
+        //
+        AlertService.success(text: apiResponse.message);
       } else {
         viewContext.showToast(
           msg: apiResponse.message,
@@ -184,7 +206,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
   }
 
   //
-  addToCart({bool force = false}) async {
+  Future<bool> addToCart({bool force = false}) async {
     //
     final cart = Cart();
     cart.price = subTotal;
@@ -192,6 +214,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
     cart.selectedQty = product.selectedQty ?? 1;
     cart.options = selectedProductOptions;
     cart.optionsIds = selectedProductOptionsIDs;
+    bool done = false;
     //
 
     try {
@@ -204,7 +227,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         //
         await CartServices.addToCart(cart);
         //
-        CoolAlert.show(
+        done = await CoolAlert.show(
           context: viewContext,
           title: "Add to cart".tr(),
           text: "%s Added to cart".tr().fill([product.name]),
@@ -218,7 +241,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
           ),
           onConfirmBtnTap: () async {
             //
-            viewContext.pop();
+            viewContext.pop(true);
             viewContext.nextPage(CartPage());
           },
           cancelBtnText: "Keep Shopping".tr(),
@@ -227,7 +250,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         );
       } else {
         //
-        CoolAlert.show(
+        done = await CoolAlert.show(
           context: viewContext,
           title: "Different Vendor".tr(),
           text:
@@ -247,6 +270,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       setError(error);
     }
     setBusy(false);
+    return done;
   }
 
   //
@@ -255,5 +279,11 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       AppRoutes.vendorDetails,
       arguments: product.vendor,
     );
+  }
+
+  buyNow() async {
+    await addToCart();
+    viewContext.pop();
+    viewContext.nextPage(CartPage());
   }
 }

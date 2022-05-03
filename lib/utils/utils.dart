@@ -1,5 +1,6 @@
 import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:fuodz/constants/app_colors.dart';
 import 'package:fuodz/constants/app_strings.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 
@@ -20,5 +21,16 @@ class Utils {
     return ColorUtils.calculateRelativeLuminance(
             color.red, color.green, color.blue) <
         0.5;
+  }
+
+  static bool isPrimaryColorDark() {
+    final color = AppColor.primaryColor;
+    return ColorUtils.calculateRelativeLuminance(
+            color.red, color.green, color.blue) <
+        0.5;
+  }
+
+  static Color textColorByTheme() {
+    return isPrimaryColorDark() ? Colors.white : Colors.black;
   }
 }

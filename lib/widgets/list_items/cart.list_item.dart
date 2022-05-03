@@ -39,7 +39,7 @@ class CartListItem extends StatelessWidget {
         VStack(
           [
             //product name
-            cart.product.name.text.semiBold.xl.make(),
+            "${cart.product.name}".text.semiBold.xl.make(),
             UiSpacer.verticalSpace(space: 0),
             //product options
             cart.optionsSentence.isNotEmpty

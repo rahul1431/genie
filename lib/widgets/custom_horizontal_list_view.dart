@@ -65,7 +65,10 @@ class CustomHorizontalListView extends StatelessWidget {
   Widget _getListView() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(children: itemsViews),
+      child: Row(
+        children: itemsViews,
+        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
     );
   }
 }

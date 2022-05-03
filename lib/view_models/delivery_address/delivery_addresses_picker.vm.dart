@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuodz/constants/app_routes.dart';
+import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/models/delivery_address.dart';
 import 'package:fuodz/requests/delivery_address.request.dart';
 import 'package:fuodz/services/app.service.dart';
@@ -35,11 +36,21 @@ class DeliveryAddressPickerViewModel extends MyBaseViewModel {
         ? CartServices.productsInCart.first.product.vendor.id
         : AppService().vendorId ?? null;
 
+    List<int> vendorIds = (CartServices.productsInCart.isNotEmpty &&
+            AppStrings.enableMultipleVendorOrder)
+        ? CartServices.productsInCart
+            .map((e) => e.product.vendorId)
+            .toList()
+            .toSet()
+            .toList()
+        : null;
+
     setBusy(true);
     try {
       unFilterDeliveryAddresses =
           deliveryAddresses = await deliveryAddressRequest.getDeliveryAddresses(
         vendorId: vendorId,
+        vendorIds: vendorIds,
       );
       clearErrors();
     } catch (error) {

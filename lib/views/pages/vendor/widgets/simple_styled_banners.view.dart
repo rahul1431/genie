@@ -20,7 +20,11 @@ class SimpleStyledBanners extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<BannersViewModel>.reactive(
-      viewModelBuilder: () => BannersViewModel(context, vendorType),
+      viewModelBuilder: () => BannersViewModel(
+        context,
+        vendorType,
+        featured: false,
+      ),
       onModelReady: (model) => model.initialise(),
       builder: (context, model, child) {
         return model.isBusy
@@ -36,7 +40,6 @@ class SimpleStyledBanners extends StatelessWidget {
                   enlargeCenterPage: true,
                   viewportFraction: 1,
                 ),
-                
                 items: model.banners.map(
                   (banner) {
                     return BannerListItem(

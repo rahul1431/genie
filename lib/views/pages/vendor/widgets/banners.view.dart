@@ -37,7 +37,9 @@ class Banners extends StatelessWidget {
       builder: (context, model, child) {
         return model.isBusy
             ? LoadingShimmer().px20().h(150)
-            : VStack(
+            : Visibility(
+                visible: model.banners != null && model.banners.isNotEmpty,
+                child: VStack(
                 [
                   CarouselSlider(
                     options: CarouselOptions(
@@ -79,6 +81,7 @@ class Banners extends StatelessWidget {
                     ).centered().py8(),
                   ),
                 ],
+                ),
               );
       },
     );

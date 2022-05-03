@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fuodz/constants/app_colors.dart';
+import 'package:fuodz/constants/app_ui_settings.dart';
 import 'package:fuodz/extensions/dynamic.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
 import 'package:fuodz/view_models/order_details.vm.dart';
@@ -48,17 +49,20 @@ class OrderDetailsVendorInfoView extends StatelessWidget {
         ),
 
         //chat
-        vm.order.canChatVendor
-            ? CustomButton(
+        if (vm.order.canChatVendor)
+          Visibility(
+            visible: AppUISettings.canVendorChat,
+            child: CustomButton(
                 icon: FlutterIcons.chat_ent,
                 iconColor: Colors.white,
-                title: "Chat with %s".tr().fill([
-                  (!vm.order.isSerice ? "Vendor" : "Service Provider").tr()
-                ]),
+              title: "Chat with %s".tr().fill(
+                  [(!vm.order.isSerice ? "Vendor" : "Service Provider").tr()]),
                 color: AppColor.primaryColor,
                 onPressed: vm.chatVendor,
-              ).h(Vx.dp48).pOnly(top: Vx.dp12, bottom: Vx.dp20)
-            : UiSpacer.emptySpace(),
+            ).h(Vx.dp48).pOnly(top: Vx.dp12, bottom: Vx.dp20),
+          )
+        else
+          UiSpacer.emptySpace(),
 
         //rate vendor
         vm.order.canRateVendor

@@ -9,9 +9,9 @@ import 'package:fuodz/views/pages/commerce/widgets/commerce_categories_products.
 import 'package:fuodz/views/pages/commerce/widgets/products_section.view.dart';
 import 'package:fuodz/views/pages/search/search.page.dart';
 import 'package:fuodz/views/pages/vendor/widgets/banners.view.dart';
+import 'package:fuodz/views/pages/vendor/widgets/categories.view.dart';
 import 'package:fuodz/widgets/base.page.dart';
 import 'package:fuodz/widgets/inputs/search_bar.input.dart';
-import 'package:fuodz/widgets/vendor_type_categories_commerce.view.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -71,14 +71,10 @@ class _CommercePageState extends State<CommercePage>
                 //banners
                 Banners(widget.vendorType),
                 //categories
-                CommerceTypeVendorTypeCategories(
+                Categories(
                   widget.vendorType,
-                  showTitle: false,
-                  description: "Categories".tr(),
-                  childAspectRatio: 1.4,
-                  lessItemCount: 8,
                 ),
-
+                
                 UiSpacer.verticalSpace(),
                 //Best sellers
                 ProductsSectionView(

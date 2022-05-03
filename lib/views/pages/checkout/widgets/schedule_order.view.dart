@@ -4,6 +4,7 @@ import 'package:fuodz/utils/ui_spacer.dart';
 import 'package:fuodz/view_models/checkout_base.vm.dart';
 import 'package:fuodz/widgets/custom_grid_view.dart';
 import 'package:fuodz/widgets/custom_list_view.dart';
+import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,7 +15,6 @@ class ScheduleOrderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Visibility(
       visible: vm.vendor.allowScheduleOrder,
       child: VStack(
@@ -60,7 +60,7 @@ class ScheduleOrderView extends StatelessWidget {
                     bool selected =
                         formmatedDeliverySlot == vm.checkout.deliverySlotDate;
                     //
-                    
+
                     return Jiffy(dateDeliverySlot.date)
                         .format("EEEE dd MMM yyyy")
                         .text
@@ -98,13 +98,20 @@ class ScheduleOrderView extends StatelessWidget {
                   crossAxisCount: 3,
                   itemBuilder: (context, index) {
                     //
-                    final availableTimeSlot = vm.availableTimeSlots[index];                  
+                    final today = DateFormat("yyyy-MM-dd", "en").format(
+                      DateTime.now(),
+                    );
+                    final availableTimeSlot = vm.availableTimeSlots[index];
                     final formmatedDeliveryTimeSlot =
-                        Jiffy(availableTimeSlot,"hh:mm:ss").format("HH:mm:ss");
-                    bool selected =
-                        formmatedDeliveryTimeSlot == vm.checkout.deliverySlotTime;
+                        DateFormat("HH:mm:ss", "en").format(
+                      DateTime.parse("$today $availableTimeSlot"),
+                    );
+
+                    //check if selected
+                    bool selected = formmatedDeliveryTimeSlot ==
+                        vm.checkout.deliverySlotTime;
                     //
-                    return Jiffy(availableTimeSlot,"hh:mm:ss")
+                    return Jiffy("$today $availableTimeSlot")
                         .format("hh:mm a")
                         .text
                         .color(

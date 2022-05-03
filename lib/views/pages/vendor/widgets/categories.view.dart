@@ -49,7 +49,7 @@ class Categories extends StatelessWidget {
                   return CategoryListItem(
                     category: category,
                     onPressed: model.categorySelected,
-                    maxLine: true,
+                    maxLine: false,
                   );
                 },
               ).toList(),

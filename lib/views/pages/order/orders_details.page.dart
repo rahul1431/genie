@@ -132,7 +132,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage>
                               padding: EdgeInsets.all(8.0),
                               child: VStack(
                                 [
-                                  vm.order.vendor.name.text.white.xl3.semiBold
+                                  vm.order.vendor.name.text.center.white.xl3.semiBold
                                       .makeCentered(),
                                   UiSpacer.verticalSpace(space: 40)
                                 ],

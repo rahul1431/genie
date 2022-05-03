@@ -1,67 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fuodz/extensions/dynamic.dart';
-import 'package:fuodz/extensions/string.dart';
 import 'package:fuodz/models/product.dart';
-import 'package:fuodz/constants/app_strings.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
+import 'package:fuodz/view_models/product_details.vm.dart';
+import 'package:fuodz/widgets/buttons/custom_outline_button.dart';
 import 'package:fuodz/widgets/cards/custom.visibility.dart';
-import 'package:fuodz/widgets/currency_hstack.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CommerceProductDetailsHeader extends StatelessWidget {
-  const CommerceProductDetailsHeader(
-      {this.product, this.showVendor = true, Key key})
-      : super(key: key);
+  const CommerceProductDetailsHeader({
+    this.product,
+    this.showVendor = true,
+    Key key,
+    this.model,
+  }) : super(key: key);
 
   final Product product;
   final bool showVendor;
+  final ProductDetailsViewModel model;
 
   @override
   Widget build(BuildContext context) {
     //
-    final currencySymbol = AppStrings.currencySymbol;
+  
 
     return VStack(
       [
-        
+        UiSpacer.verticalSpace(),
         //product name
-        product.name.text.sm.semiBold.make(),
-
-        //price
-        HStack(
-          [
-            //price
-            CurrencyHStack(
-              [
-                currencySymbol.text.lg.bold.color(context.primaryColor).make(),
-                product.sellPrice.currencyValueFormat()
-                    .text
-                    .xl2
-                    .bold.color(context.primaryColor)
-                    .make(),
-              ],
-              crossAlignment: CrossAxisAlignment.end,
-            ),
-            UiSpacer.smHorizontalSpace(),
-            //discount
-            CustomVisibilty(
-              visible: product.showDiscount,
-              child: CurrencyHStack(
-                [
-                  currencySymbol.text.lineThrough.xs.color(context.primaryColor).make(),
-                  product.price
-                      .currencyValueFormat()
-                      .text
-                      .lineThrough
-                      .lg
-                      .thin.color(context.primaryColor)
-                      .make(),
-                ],
-              ),
-            ),
-          ],
-        ),
+        product.name.text.lg.semiBold.make(),
 
         //product size details and more
         HStack(
@@ -121,9 +90,28 @@ class CommerceProductDetailsHeader extends StatelessWidget {
                   .gray500
                   .make(),
             ),
+            UiSpacer.smHorizontalSpace(),
+            //fav
+            CustomOutlineButton(
+              loading: model.isBusy,
+              color: Colors.transparent,
+              child: Icon(
+                (!model.isAuthenticated()
+                        ? model.openLogin
+                        : !model.product.isFavourite)
+                    ? FlutterIcons.heart_o_faw
+                    : FlutterIcons.heart_faw,
+                color: Colors.red,
+              ),
+              onPressed: !model.isAuthenticated()
+                  ? model.openLogin
+                  : !model.product.isFavourite
+                      ? model.addToFavourite
+                      : model.removeFromFavourite,
+            ),
           ],
         ).pOnly(top: Vx.dp10),
       ],
-    ).px20().py12();
+    ).px20();
   }
 }

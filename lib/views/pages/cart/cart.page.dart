@@ -86,7 +86,10 @@ class _CartPageState extends State<CartPage> {
                         onPressed: model.checkoutPressed,
                       ).h(Vx.dp48).py32(),
                     ],
-                  ).scrollVertical().expand(),
+                  )
+                      .pOnly(bottom: context.mq.viewPadding.bottom)
+                      .scrollVertical()
+                      .expand(),
               ],
             ).p20();
           },

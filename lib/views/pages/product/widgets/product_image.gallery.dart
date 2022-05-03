@@ -27,8 +27,9 @@ class _ProductImagesGalleryViewState extends State<ProductImagesGalleryView> {
         CustomImage(
           imageUrl: selectedPhoto ?? widget.product.photo,
           boxFit: BoxFit.contain,
-          height: context.percentHeight * 25,
+          height: context.percentHeight * 30,
           width: double.infinity,
+          canZoom: true,
         ).box.color(AppColor.faintBgColor).make(),
         //preview of other items
         CustomVisibilty(
@@ -45,6 +46,7 @@ class _ProductImagesGalleryViewState extends State<ProductImagesGalleryView> {
                 boxFit: BoxFit.contain,
                 height: 70,
                 width: 60,
+                canZoom: true,
               ).box.color(AppColor.faintBgColor).make().onInkTap(() {
                 setState(() {
                   selectedPhoto = photo;

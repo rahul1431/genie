@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fuodz/constants/api.dart';
 import 'package:fuodz/models/api_response.dart';
 import 'package:fuodz/models/delivery_address.dart';
@@ -5,11 +7,16 @@ import 'package:fuodz/services/http.service.dart';
 
 class DeliveryAddressRequest extends HttpService {
   //
-  Future<List<DeliveryAddress>> getDeliveryAddresses({int vendorId}) async {
+  Future<List<DeliveryAddress>> getDeliveryAddresses({
+    int vendorId,
+    List<int> vendorIds,
+  }) async {
+    //
     final apiResult = await get(
       Api.deliveryAddresses,
       queryParameters: {
         "vendor_id": vendorId,
+        "vendor_ids": jsonEncode(vendorIds),
       },
     );
 
@@ -37,7 +44,9 @@ class DeliveryAddressRequest extends HttpService {
     //
     final apiResponse = ApiResponse.fromResponse(apiResult);
     if (apiResponse.allGood) {
-      return apiResponse.body.toString().isNotEmpty ? DeliveryAddress.fromJson(apiResponse.body): null;
+      return apiResponse.body.toString().isNotEmpty
+          ? DeliveryAddress.fromJson(apiResponse.body)
+          : null;
     } else {
       throw apiResponse.message;
     }

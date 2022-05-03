@@ -24,6 +24,7 @@ class _WelcomePageState extends State<WelcomePage>
       body: ViewModelBuilder<WelcomeViewModel>.reactive(
         viewModelBuilder: () => WelcomeViewModel(context),
         onModelReady: (vm) => vm.initialise(),
+        disposeViewModel: false,
         builder: (context, vm, child) {
           return EmptyWelcome(vm: vm);
         },
