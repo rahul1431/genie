@@ -33,6 +33,64 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766606838699:android:4366403001dd94a19120ee",
+        "android_client_info": {
+          "package_name": "com.genieonbike.genieonbikedeliveryboy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766606838699-b8464frdkfdu3naodarpdfc801v8dbp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRW3inPFrzg6LdQ9b27p5c8EUjhr_Yf_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766606838699-b8464frdkfdu3naodarpdfc801v8dbp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766606838699:android:7c71a11ff74c64f69120ee",
+        "android_client_info": {
+          "package_name": "com.genieonbike.genieonbikevendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766606838699-b8464frdkfdu3naodarpdfc801v8dbp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRW3inPFrzg6LdQ9b27p5c8EUjhr_Yf_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766606838699-b8464frdkfdu3naodarpdfc801v8dbp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
