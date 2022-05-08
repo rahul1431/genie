@@ -132,7 +132,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage>
                               padding: EdgeInsets.all(8.0),
                               child: VStack(
                                 [
-                                  vm.order.vendor.name.text.center.white.xl3.semiBold
+                                  vm.order.vendor.name.text.center.white.xl3
+                                      .semiBold
                                       .makeCentered(),
                                   UiSpacer.verticalSpace(space: 40)
                                 ],
@@ -251,9 +252,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage>
                               deliveryFee: vm.order.deliveryFee,
                               tax: vm.order.tax,
                               driverTip: vm.order.tip,
-                              vendorTax:
-                                  ((vm.order.tax / vm.order.subTotal) * 100)
-                                      .toDoubleStringAsFixed(),
+                              vendorTax: vm.order.taxRate.toString(),
                               total: vm.order.total,
                             )
                                 .wFull(context)

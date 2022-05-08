@@ -67,6 +67,7 @@ class VendorDetailsViewModel extends MyBaseViewModel {
       clearErrors();
     } catch (error) {
       setError(error);
+      print("error ==> ${error}");
     }
     setBusy(false);
   }

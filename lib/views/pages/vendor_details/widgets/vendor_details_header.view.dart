@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fuodz/constants/app_ui_settings.dart';
 import 'package:fuodz/utils/ui_spacer.dart';
 import 'package:fuodz/view_models/vendor_details.vm.dart';
+import 'package:fuodz/views/pages/vendor/vendor_reviews.page.dart';
 import 'package:fuodz/widgets/buttons/call.button.dart';
 import 'package:fuodz/widgets/buttons/route.button.dart';
 import 'package:fuodz/widgets/cards/custom.visibility.dart';
@@ -100,13 +101,19 @@ class VendorDetailsHeader extends StatelessWidget {
                               ),
                               onRatingUpdate: (value) {},
                             ).pOnly(right: 2),
-                            "(${model.vendor.rating_count ?? 0} ${'Reviews'.tr()})"
+                            "(${model.vendor.reviews_count ?? 0} ${'Reviews'.tr()})"
                                 .text
                                 .sm
                                 .thin
                                 .make(),
                           ],
-                        ).py2(),
+                        ).py2().onTap(
+                          () {
+                            context.nextPage(
+                              VendorReviewsPage(model.vendor),
+                            );
+                          },
+                        ),
                       ],
                     ).pOnly(left: Vx.dp12).expand(),
                     //icons

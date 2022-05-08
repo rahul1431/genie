@@ -12,12 +12,20 @@ class DeliveryAddressRequest extends HttpService {
     List<int> vendorIds,
   }) async {
     //
+
+    Map<String, dynamic> params = {
+      "vendor_id": vendorId,
+    };
+
+    if (vendorIds != null) {
+      params.addAll({
+        "vendor_ids": jsonEncode(vendorIds),
+      });
+    }
+
     final apiResult = await get(
       Api.deliveryAddresses,
-      queryParameters: {
-        "vendor_id": vendorId,
-        "vendor_ids": jsonEncode(vendorIds),
-      },
+      queryParameters: params,
     );
 
     //

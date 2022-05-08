@@ -32,7 +32,7 @@ class Vendor {
     this.pickup,
     this.delivery,
     this.rating,
-    this.rating_count,
+    this.reviews_count,
     this.chargePerKm,
     this.isOpen,
     this.isActive,
@@ -81,7 +81,7 @@ class Vendor {
   int pickup;
   int delivery;
   int rating;
-  int rating_count;
+  int reviews_count;
   int chargePerKm;
   bool isOpen;
   int isActive;
@@ -141,7 +141,7 @@ class Vendor {
           json["delivery"] == null ? 0 : int.parse(json["delivery"].toString()),
       rating:
           json["rating"] == null ? null : int.parse(json["rating"].toString()),
-      rating_count: json["rating_count"],
+      reviews_count: json["reviews_count"],
       chargePerKm: json["charge_per_km"] == null
           ? null
           : int.parse(json["charge_per_km"].toString()),
@@ -229,7 +229,7 @@ class Vendor {
         "pickup": pickup,
         "delivery": delivery,
         "rating": rating,
-        "rating_count": rating_count,
+        "reviews_count": reviews_count,
         "charge_per_km": chargePerKm == null ? null : chargePerKm,
         "is_open": isOpen == null ? null : isOpen,
         "is_active": isActive == null ? null : isActive,

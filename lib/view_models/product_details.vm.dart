@@ -105,7 +105,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
     });
 
     //
-    if (product.plusOption == 1) {
+    if (product.plusOption == 1 || selectedProductOptions.isEmpty) {
       subTotal = productPrice + totalOptionPrice;
     } else {
       subTotal = totalOptionPrice;

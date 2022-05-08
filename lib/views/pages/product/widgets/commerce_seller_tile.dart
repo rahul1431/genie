@@ -14,17 +14,18 @@ class CommerceSellerTile extends StatelessWidget {
       [
         "Seller:".text.make().expand(flex: 2),
         UiSpacer.smHorizontalSpace(),
-        model.product.vendor.name.text.underline
+        "${model.product?.vendor?.name}"
+            .text
+            .underline
             .color(AppColor.primaryColor)
             .make()
-            .expand(flex: 4)
             .onInkTap(() {
           context.nextPage(
             VendorDetailsPage(
               vendor: model.product.vendor,
             ),
           );
-        }),
+        }).expand(flex: 4),
       ],
     ).py12().px20();
   }

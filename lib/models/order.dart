@@ -34,6 +34,7 @@ class Order {
     this.deliveryFee,
     this.comission,
     this.tax,
+    this.taxRate,
     this.tip,
     this.total,
     this.deliveryAddressId,
@@ -83,6 +84,7 @@ class Order {
   double deliveryFee;
   double comission;
   double tax;
+  double taxRate;
   double tip;
   double total;
   int deliveryAddressId;
@@ -148,6 +150,7 @@ class Order {
           : double.parse(json["comission"].toString()),
 
       tax: json["tax"] == null ? null : double.parse(json["tax"].toString()),
+      taxRate: json["tax_rate"] == null ? null : double.parse(json["tax_rate"].toString()),
       tip: json["tip"] == null ? null : double.parse(json["tip"].toString()),
       total:
           json["total"] == null ? null : double.parse(json["total"].toString()),
@@ -250,6 +253,7 @@ class Order {
         "delivery_fee": deliveryFee,
         "comission": comission,
         "tax": tax,
+        "tax_rate": taxRate,
         "tip": tip,
         "total": total,
         "delivery_address_id": deliveryAddressId,
