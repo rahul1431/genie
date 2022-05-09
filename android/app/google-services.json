@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "766606838699-s1ab210n1c5r1470b2grr2ia5jbg3glb.apps.googleusercontent.com",
+          "client_id": "766606838699-k0bgad4fjmq0h2n1vjrbrn029metuqpv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.genieonbike.genieonbike",
-            "certificate_hash": "ea69fc5f1359dfc7ef37de4f4713412fdcaa3d36"
+            "certificate_hash": "7972746c11aba8c81391dd0ce4556b04c70567af"
           }
         },
         {
@@ -58,11 +58,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "766606838699-9td5u7glf4lhnbe1bdokadcog17rilgo.apps.googleusercontent.com",
+          "client_id": "766606838699-87l3dtm52n9drpf8pnq2padipjn2jegv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.genieonbike.genieonbikedeliveryboy",
-            "certificate_hash": "ea69fc5f1359dfc7ef37de4f4713412fdcaa3d36"
+            "certificate_hash": "7972746c11aba8c81391dd0ce4556b04c70567af"
           }
         },
         {
@@ -102,11 +102,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "766606838699-590qeds0np5gedflqo6563akn302cbjg.apps.googleusercontent.com",
+          "client_id": "766606838699-31atuuph5m62dgcqj66n30p5l9jcuo1h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.genieonbike.genieonbikevendor",
-            "certificate_hash": "ea69fc5f1359dfc7ef37de4f4713412fdcaa3d36"
+            "certificate_hash": "7972746c11aba8c81391dd0ce4556b04c70567af"
           }
         },
         {
