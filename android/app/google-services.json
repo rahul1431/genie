@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "766606838699-k0bgad4fjmq0h2n1vjrbrn029metuqpv.apps.googleusercontent.com",
+          "client_id": "766606838699-9d6uei55j1itrnm2uu70ku85neid6fos.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.genieonbike.genieonbike",
-            "certificate_hash": "7972746c11aba8c81391dd0ce4556b04c70567af"
+            "certificate_hash": "9dee0a41c46e07fc1a62d6710b19efdb02892213"
+          }
+        },
+        {
+          "client_id": "766606838699-aefipf3i6jao651qa3tb3d005o38dm96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.genieonbike.genieonbike",
+            "certificate_hash": "ea69fc5f1359dfc7ef37de4f4713412fdcaa3d36"
           }
         },
         {
